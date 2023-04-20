@@ -6,14 +6,14 @@ const nextConfig = {
     esmExternals: 'loose'
   },
   webpack:(config)=>{
-    
-    config.module.rules.push({
-      test: /\.(mp3|wasm)$/,
-      type: "asset/resource",
-      generator: {
-        filename: "static/chunks/[path][name].[hash][ext]",
-      },
-    });
+
+    // config.module.rules.push({
+    //   test: /\.(mp3|wasm)$/,
+    //   type: "asset/resource",
+    //   generator: {
+    //     filename: "static/chunks/[path][name].[hash][ext]",
+    //   },
+    // });
 
     config.plugins.push(new MonacoWebpackPlugin({languages:[]}))
     return config

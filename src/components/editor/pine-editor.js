@@ -1,8 +1,7 @@
-import { MonacoServices, MonacoLanguageClient } from "monaco-languageclient"
 import {BrowserMessageReader, BrowserMessageWriter} from 'vscode-jsonrpc/browser'
 // import { CloseAction, ErrorAction} from 'vscode-languageclient/lib/common/client.js';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-
+import {CloseAction, ErrorAction} from 'vscode-languageclient/browser'
 
 const constCfg = {
     fontFamily: 'Menlo, "Ubuntu Mono", Consolas, source-code-pro, monospace',
@@ -31,10 +30,10 @@ function createPineLanguageClient() {
 
     const clientOptions = {
         documentSelector: ['pine'],
-        // errorHandler: { 
-        //     error: ()=>({action: ErrorAction.Continue}), 
-        //     closed: ()=>({action: CloseAction.DoNotRestart})
-        // },
+        errorHandler: { 
+            error: ()=>({action: ErrorAction.Continue}), 
+            closed: ()=>({action: CloseAction.DoNotRestart})
+        },
         markdown: { isTrusted: true },
     };
     const connectionProvider = { 
@@ -46,12 +45,12 @@ function createPineLanguageClient() {
         )
     };
 
-    const monacoLanguageClient = new MonacoLanguageClient({ 
-        name: "Language Client", 
-        clientOptions, 
-        connectionProvider 
-    });
-    return monacoLanguageClient;
+    // const monacoLanguageClient = new MonacoLanguageClient({ 
+    //     name: "Language Client", 
+    //     clientOptions, 
+    //     connectionProvider 
+    // });
+    // return monacoLanguageClient;
 }
 
 export class PineEditor {
@@ -78,7 +77,7 @@ export class PineEditor {
                 )
             }
         }
-        MonacoServices.install()
+        // MonacoServices.install()
         const languageClient = createPineLanguageClient()
         // this._monaco.languageClient.start().then(()=>{
 
